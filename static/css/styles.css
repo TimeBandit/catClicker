@@ -1,0 +1,15 @@
+#list {
+	list-style: inside;
+    padding-left: 0px;
+}
+
+.image {
+	border: none;
+    border-radius: 50%;	
+}
+
+#count {
+    font-size: 8em;
+    font-family: 'Lobster', cursive;
+    text-align: center;
+}
