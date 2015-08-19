@@ -3,13 +3,18 @@
     padding-left: 0px;
 }
 
-.image {
+/*.image {
 	border: none;
     border-radius: 50%;	
-}
+}*/
 
 #count {
     font-size: 8em;
     font-family: 'Lobster', cursive;
     text-align: center;
+}
+
+body {
+	/*min-height: 2000px;*/
+	padding-top: 70px;
 }

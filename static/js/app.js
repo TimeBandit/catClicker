@@ -96,7 +96,7 @@ var model = {
 			var cat = controller.getCurrentCat();
 
 			// now for the images
-			this.image = document.getElementsByTagName('img')[0];
+			this.image = document.getElementsByTagName('img')[1];
 			this.image.src = cat.imgUrl;
 
 			this.name = document.getElementById('name');
