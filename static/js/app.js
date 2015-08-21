@@ -69,14 +69,17 @@ var model = {
 
 			for (var i = 0; i < cats.length; i++) {
 				// create new list item
-				var button = document.createElement('button');
+				var listIem = document.createElement('li');
+				var anchor = document.createElement('a');
+				anchor.innerHTML = cats[i].name;
+				listIem.appendChild(anchor)
 				
-				button.type = 'button';
-				button.className = 'btn btn-default';
-				button.innerHTML = cats[i].name;
+				// button.type = 'button';
+				// button.className = 'btn btn-default';
+				// button.innerHTML = cats[i].name;
 
 				// add event
-				button.addEventListener('click', (function(cat, i){
+				listIem.addEventListener('click', (function(cat, i){
 					
 					return function() {
 						controller.setCurrentCat(cat); // store the current cat index
@@ -85,7 +88,7 @@ var model = {
 					
 				})(cats[i], i)); // use IIFE to bind a cat with a list item
 
-				list.appendChild(button);
+				list.appendChild(listIem);
 			};
 		}
 	};
