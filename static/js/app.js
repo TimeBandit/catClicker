@@ -2,6 +2,8 @@
 $(document).on('click','.navbar-collapse.in',function(e) {
     	if( $(e.target).is('a') && $(e.target).attr('class') != 'dropdown-toggle' ) 
     	{
+    		// console.log(e.target);
+    		// console.log($(this));
     		$(this).collapse('hide');
     	}
     });
@@ -88,6 +90,7 @@ var model = {
 					return function() {
 						controller.setCurrentCat(cat); // store the current cat index
 						catView.render();
+						console.log(cat);
 					};
 					
 				})(cats[i], i)); // use IIFE to bind a cat with a list item
@@ -99,6 +102,7 @@ var model = {
 
 
 	var catView = {		
+		// 'this' is the current object
 
 		init: function () {
 			var cat = controller.getCurrentCat();
@@ -111,7 +115,6 @@ var model = {
 			this.name.textContent = cat.name;
 
 			this.count = document.getElementById('count');
-			console.log(cat.get_count());
 			this.count.textContent = cat.get_count(); 
 
 			image.addEventListener('click', function(){
@@ -125,9 +128,9 @@ var model = {
 			var cat = controller.getCurrentCat();
 			var count = cat.get_count();
 			
-			this.count.textContent = cat.get_count(); 
-			
 			this.image.src = cat.imgUrl;
+			this.name.textContent = cat.name;
+			this.count.textContent = cat.get_count();
 		}
 	};
 
