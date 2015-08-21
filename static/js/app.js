@@ -1,3 +1,11 @@
+// see: https://stackoverflow.com/questions/21203111/bootstrap-3-collapsed-menu-doesnt-close-on-click
+$(document).on('click','.navbar-collapse.in',function(e) {
+    	if( $(e.target).is('a') && $(e.target).attr('class') != 'dropdown-toggle' ) 
+    	{
+    		$(this).collapse('hide');
+    	}
+    });
+
 var model = {
 		catList: [],
 		currentCat: null,
@@ -73,10 +81,6 @@ var model = {
 				var anchor = document.createElement('a');
 				anchor.innerHTML = cats[i].name;
 				listIem.appendChild(anchor)
-				
-				// button.type = 'button';
-				// button.className = 'btn btn-default';
-				// button.innerHTML = cats[i].name;
 
 				// add event
 				listIem.addEventListener('click', (function(cat, i){
@@ -92,6 +96,7 @@ var model = {
 			};
 		}
 	};
+
 
 	var catView = {		
 
