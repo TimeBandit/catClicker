@@ -1,18 +1,8 @@
 #list {
-	list-style: inside;
-    padding-left: 0px;
+	padding: 9px;
 }
 
-/*.image {
-	border: none;
-    border-radius: 50%;	
-}*/
 
-#count {
-    font-size: 8em;
-    font-family: 'Lobster', cursive;
-    text-align: center;
-}
 
 body {
 	/*min-height: 2000px;*/

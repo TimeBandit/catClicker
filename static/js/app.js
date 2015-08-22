@@ -78,14 +78,17 @@ var model = {
 			var cats = controller.getCatList();
 
 			for (var i = 0; i < cats.length; i++) {
-				// create new list item
-				var listIem = document.createElement('li');
-				var anchor = document.createElement('a');
-				anchor.innerHTML = cats[i].name;
-				listIem.appendChild(anchor)
 
+				//<button type="button" class="btn btn-default">Left</button> 
+
+				// create new list item
+				var button = document.createElement('button');
+				button.className = "btn btn-default";
+				button.type = "button";
+				button.innerHTML = cats[i].name;
+				
 				// add event
-				listIem.addEventListener('click', (function(cat, i){
+				button.addEventListener('click', (function(cat, i){
 					
 					return function() {
 						controller.setCurrentCat(cat); // store the current cat index
@@ -95,7 +98,7 @@ var model = {
 					
 				})(cats[i], i)); // use IIFE to bind a cat with a list item
 
-				list.appendChild(listIem);
+				list.appendChild(button);
 			};
 		}
 	};
@@ -133,6 +136,17 @@ var model = {
 			this.count.textContent = cat.get_count();
 		}
 	};
+
+	var dropDown = {
+
+		init: function function_name (argument) {
+			// body...
+		},
+
+		render: function function_name (argument) {
+			// body...
+		}
+	}
 
 	// make it all go
 	controller.init();

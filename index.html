@@ -37,9 +37,10 @@
               </a>
               <p class="navbar-text lead" id="name"></p>
             </div>
-            <div id="navbar" class="navbar-collapse collapse navbar-right">
-                <ul class="nav navbar-nav" id="list">
-                    <li class="navbar-text">Choose a Cat</li>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">   
+                    <div id="list" class="btn-group" role="group" aria-label="...">
+                    </div>
                 </ul>
             </div>
         </div>
@@ -48,27 +49,18 @@
     <div class="container">        
     	<div class="row">
     		<div class="col-sm-6 col-xs-12">
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        Click the Cat, Increase the Count.
-                    </div>
-                    <div class="panel-body">
-                        <div id="image" class="img-responsive" alt="A kitten">
-                            <img class="image" src="" width="100%">
-                        </div>
-                    </div>
-                </div>    			
+                <ul class="list-group">
+                  <li class="list-group-item">
+                    Click the Cat
+                    <span class="badge" id="count"></span>
+                  </li>
+                  <li class="list-group-item">
+                    <div id="image" class="img-responsive" alt="A kitten">
+                    <img class="image" src="" width="100%">
+                    </div>  
+                  </li>
+                </ul>                
     		</div>
-            <div class="col-sm-6 col-xs-12">
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        Click Count
-                    </div>
-                    <div class="panel-body">
-                        <div id="count"></div>                  
-                    </div>
-                </div> 
-            </div>
     	</div>
 	</div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
