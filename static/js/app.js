@@ -74,32 +74,40 @@ var model = {
 
 	var listView = {
 		init: function (argument) {
-			var list = document.getElementById("list");
-			var cats = controller.getCatList();
+			this.list = document.getElementById("list");
+			this.cats = controller.getCatList();
 
-			for (var i = 0; i < cats.length; i++) {
-
-				//<button type="button" class="btn btn-default">Left</button> 
+			for (var i = 0; i < this.cats.length; i++) {
 
 				// create new list item
-				var button = document.createElement('button');
-				button.className = "btn btn-default";
-				button.type = "button";
-				button.innerHTML = cats[i].name;
+				var listItem = document.createElement('li');
+				listItem.className = "list-group-item";
+				listItem.innerHTML = this.cats[i].name;
+
+				var span = document.createElement('span');
+				span.className = "badge";
+				span.innerHTML = this.cats[i].get_count();
+
+				listItem.appendChild(span);				
 				
 				// add event
-				button.addEventListener('click', (function(cat, i){
+				listItem.addEventListener('click', (function(cat, i){
 					
 					return function() {
 						controller.setCurrentCat(cat); // store the current cat index
 						catView.render();
+						this.init();
 						console.log(cat);
 					};
 					
-				})(cats[i], i)); // use IIFE to bind a cat with a list item
+				})(this.cats[i], i)); // use IIFE to bind a cat with a list item
 
-				list.appendChild(button);
+				this.list.appendChild(listItem);
 			};
+		},
+
+		render: function (argument) {
+			// body...
 		}
 	};
 
@@ -136,17 +144,6 @@ var model = {
 			this.count.textContent = cat.get_count();
 		}
 	};
-
-	var dropDown = {
-
-		init: function function_name (argument) {
-			// body...
-		},
-
-		render: function function_name (argument) {
-			// body...
-		}
-	}
 
 	// make it all go
 	controller.init();
