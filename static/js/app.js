@@ -128,7 +128,7 @@ var model = {
 			this.count = document.getElementById('count');
 			this.count.textContent = cat.get_count(); 
 
-			image.addEventListener('click', function(){
+			this.image.addEventListener('click', function(){
 				// inc the count and display
 				controller.getCurrentCat().inc_count();
 				catView.render();
