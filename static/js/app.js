@@ -30,7 +30,7 @@ var model = {
 			var imgUrl = spec.imgUrl || '';
 			var count = 0;
 			
-			// decalre the public interface
+			// declare the public interface
 			var inc_count = function(){
 				count = count + 1;
 			};
@@ -74,19 +74,25 @@ var model = {
 
 	var listView = {
 		init: function (argument) {
-			this.list = document.getElementById("list");
-			this.cats = controller.getCatList();
+			this.render()
+		},
 
-			for (var i = 0; i < this.cats.length; i++) {
+		render: function (argument) {
+			
+			this.list = document.getElementById("list");
+			this.list.innerHTML = "";
+			var cats = controller.getCatList();
+
+			for (var i = 0; i < cats.length; i++) {
 
 				// create new list item
 				var listItem = document.createElement('li');
 				listItem.className = "list-group-item";
-				listItem.innerHTML = this.cats[i].name;
+				listItem.innerHTML = cats[i].name;
 
 				var span = document.createElement('span');
 				span.className = "badge";
-				span.innerHTML = this.cats[i].get_count();
+				span.innerHTML = cats[i].get_count();
 
 				listItem.appendChild(span);				
 				
@@ -96,18 +102,12 @@ var model = {
 					return function() {
 						controller.setCurrentCat(cat); // store the current cat index
 						catView.render();
-						this.init();
-						console.log(cat);
 					};
 					
-				})(this.cats[i], i)); // use IIFE to bind a cat with a list item
+				})(cats[i], i)); // use IIFE to bind a cat with a list item
 
 				this.list.appendChild(listItem);
 			};
-		},
-
-		render: function (argument) {
-			// body...
 		}
 	};
 
@@ -132,6 +132,7 @@ var model = {
 				// inc the count and display
 				controller.getCurrentCat().inc_count();
 				catView.render();
+				listView.init();
 			});
 		},
 
