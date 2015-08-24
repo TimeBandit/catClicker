@@ -8,6 +8,11 @@ $(document).on('click','.navbar-collapse.in',function(e) {
     	}
     });
 
+//Due to how HTML5 defines its semantics, the autofocus HTML attribute has no effect in Bootstrap modals.
+$('#myModal').on('shown.bs.modal', function () {
+  $('#myInput').focus()
+})
+
 var model = {
 		catList: [],
 		currentCat: null,

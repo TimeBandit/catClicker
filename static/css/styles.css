@@ -12,3 +12,7 @@ body {
 	padding-bottom: 29px;
 	border-top: none;
 }
+
+.input-group {
+	margin: 20px 30px;
+}
