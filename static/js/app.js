@@ -24,6 +24,7 @@ var model = {
 				this.catList.push(this.makeCat({imgUrl: 'static/img/' + this.catPics[i]})); 
 			};
 
+			// init the current cat
 			this.currentCat = this.catList[0];
 		},
 
@@ -123,13 +124,13 @@ var model = {
 		init: function () {
 			var cat = controller.getCurrentCat();
 
-			// now for the images
+			// the images
 			this.image = document.getElementsByTagName('img')[1];
 			this.image.src = cat.imgUrl;
-
+			// the cats name
 			this.name = document.getElementById('name');
 			this.name.textContent = cat.name;
-
+			// click count for this current cat
 			this.count = document.getElementById('count');
 			this.count.textContent = cat.get_count(); 
 
