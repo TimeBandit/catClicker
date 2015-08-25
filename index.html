@@ -35,23 +35,23 @@
                         <div class="row">
                             <form>
                                 <div class="form-group">
-                                    <label for="catname">The name of this cat.</label>
-                                    <input type="text" class="form-control" id="catName" placeholder="Name" required>
+                                    <label for="catName">The name of this cat.</label>
+                                    <input type="text" class="form-control" id="catName" name="catName" placeholder="Name">
                                 </div>
                                 <div class="form-group">
                                     <label for="imageUrl">Where is this cat's photo</label>
-                                    <input type="url" class="form-control" id="imageUrl" placeholder="Location" required>
+                                    <input type="url" class="form-control" id="imageUrl" name="imageUrl" placeholder="Location">
                                 </div>
                                 <div class="form-group">
-                                    <label for="clickcount">How many times this poor kitten got clicked</label>
-                                    <input type="number" class="form-control" id="clickCount" placeholder="Click Count" required>
+                                    <label for="clickCount">How many times this poor kitten got clicked</label>
+                                    <input type="text" class="form-control" id="clickCount" name="clickCount" placeholder="Click Count">
                                 </div>
                             </form>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" >Save changes</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
                     </div>
                 </div>
             </div>
@@ -61,12 +61,12 @@
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+                <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                </button>
+                </button> -->
                 <a class="navbar-brand" href="#">
                     <img style="max-width:32px; margin-top: 4px;" src="static/img/cat-icon.ico" alt="Cat Clicker">
                 </a>
@@ -107,15 +107,44 @@
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <!-- form field validator -->
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
-    <script>
-    $("form").validate();
-    </script>
+    <script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
     <!-- name generator -->
     <script src="static/js/chance.js"></script>
     <!-- where the magic happens -->
     <script src="static/js/app.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script>
+    // http://twitterbootstrap.org/bootstrap-form-validation/
+    var validator = $("form").validate({
+        rules: {
+            catName: {
+                required: true,
+                required: true
+            },
+
+            imageUrl: {
+                minlength: 6,
+                required: true
+            },
+
+            clickCount: {
+                required: true,
+                min: 0,
+                digits: true
+            }
+
+        },
+        highlight: function(element) {
+            $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+        },
+        success: function(element) {
+            element
+                .text('OK!').addClass('valid')
+                .closest('.form-group').removeClass('has-error').addClass('has-success');
+        }
+    });
+    </script>
 </body>
 
 </html>
