@@ -21,7 +21,8 @@ var model = {
 		init: function () {
 			// generate all the cats
 			for (var i = 0; i < this.catPics.length; i++) {
-				this.catList.push(this.makeCat({imgUrl: 'static/img/' + this.catPics[i]})); 
+				this.catList.push(this.makeCat({imgUrl: 'static/img/' + this.catPics[i]}));
+				// console.log(this.catList[i]);
 			};
 
 			// init the current cat
@@ -63,6 +64,7 @@ var model = {
 			model.init();
 			listView.init();
 			catView.init();
+			//formView.init();
 		},
 
 		getCurrentCat: function () {
@@ -75,6 +77,16 @@ var model = {
 
 		getCatList: function () {
 			return model.catList;
+		},
+
+		updateCat: function (updated) {
+			var cat = getCurrentCat;
+			cat.name = updated.name;
+			cat.imgUrl = updated.imgUrl;
+			cat.count = updated.count;
+			
+			listView.render();
+			catView.render();
 		}
 	};
 
@@ -151,6 +163,21 @@ var model = {
 			this.count.textContent = cat.get_count();
 		}
 	};
+
+	var formView = {
+		init: function () {
+			this.submit = document.getElementById('submit');
+			this.image.addEventListener('click', function () {
+				formView.render();
+			})
+		},
+
+		render: function (argument) {
+			// update the cat data
+			// render the list
+			// render the view
+		}
+	}
 
 	// make it all go
 	controller.init();
