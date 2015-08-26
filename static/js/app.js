@@ -97,25 +97,26 @@ var model = {
 
 		render: function (argument) {
 			
-			this.list = document.getElementById("list");
-			this.list.innerHTML = "";
+			// this.list = document.getElementById("list");
+			this.$list = $('#list').html('')
+			
 			var cats = controller.getCatList();
 
 			for (var i = 0; i < cats.length; i++) {
 
 				// create new list item
-				var listItem = document.createElement('li');
-				listItem.className = "list-group-item";
-				listItem.innerHTML = cats[i].name;
+				var $listItem = $('<li>')
+					.addClass('list-group-item')
+					.html(cats[i].name);
 
-				var span = document.createElement('span');
-				span.className = "badge";
-				span.innerHTML = cats[i].get_count();
+				var $span = $('<span>')
+					.addClass('badge')
+					.html(cats[i].get_count());
 
-				listItem.appendChild(span);				
+				$listItem.append($span);				
 				
 				// add event
-				listItem.addEventListener('click', (function(cat, i){
+				$listItem.on('click', (function(cat, i){
 					
 					return function() {
 						controller.setCurrentCat(cat); // store the current cat index
@@ -124,7 +125,7 @@ var model = {
 					
 				})(cats[i], i)); // use IIFE to bind a cat with a list item
 
-				this.list.appendChild(listItem);
+				this.$list.append($listItem);
 			};
 		}
 	};
