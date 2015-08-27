@@ -118,12 +118,13 @@ var model = {
 				// add event
 				$listItem.on('click', (function(cat, i){
 					
-					return function() {
+					return function(e) {
 						controller.setCurrentCat(cat); // store the current cat index
 						catView.render();
 					};
 					
 				})(cats[i], i)); // use IIFE to bind a cat with a list item
+								 // return a function with with the bound data
 
 				this.$list.append($listItem);
 			};
@@ -138,16 +139,15 @@ var model = {
 			var cat = controller.getCurrentCat();
 
 			// the images
-			this.image = document.getElementsByTagName('img')[1];
-			this.image.src = cat.imgUrl;
+			this.$image = $('img:eq(1)');
+			this.$image.attr('src', cat.imgUrl);
+			
 			// the cats name
-			this.name = document.getElementById('name');
-			this.name.textContent = cat.name;
+			this.$name = $('#name').text(cat.name);
 			// click count for this current cat
-			this.count = document.getElementById('count');
-			this.count.textContent = cat.get_count(); 
+			this.$count = $('#count').text(cat.get_count()); 
 
-			this.image.addEventListener('click', function(){
+			this.$image.on('click', function(e){
 				// inc the count and display
 				controller.getCurrentCat().inc_count();
 				catView.render();
@@ -159,9 +159,9 @@ var model = {
 			var cat = controller.getCurrentCat();
 			var count = cat.get_count();
 			
-			this.image.src = cat.imgUrl;
-			this.name.textContent = cat.name;
-			this.count.textContent = cat.get_count();
+			this.$image.attr('src', cat.imgUrl);
+			this.$name.text(cat.name);
+			this.$count.text(cat.get_count());
 		}
 	};
 
