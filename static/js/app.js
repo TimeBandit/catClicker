@@ -122,6 +122,7 @@ var listView = {
                 return function(e) {
                     controller.setCurrentCat(cat); // store the current cat index
                     catView.render();
+                    //console.log(cat.get_count());
                 };
 
             })(cats[i], i)); // use IIFE to bind a cat with a list item
@@ -154,6 +155,13 @@ var catView = {
             catView.render();
             listView.init();
         });
+
+        $('#myModal').on('show.bs.modal', function(e) {
+        	var cat = controller.getCurrentCat();
+            $('#catName').val(cat.name);
+            $('#imageUrl').val(cat.imgUrl);
+            $('#clickCount').val(cat.get_count());
+        })
     },
 
     render: function() {
@@ -171,6 +179,7 @@ var formView = {
         // http://twitterbootstrap.org/bootstrap-form-validation
         // http://jqueryvalidation.org/
 
+        // setup form validation
         var validator = $("form").validate({
             rules: {
                 debug: true,
@@ -203,12 +212,27 @@ var formView = {
 
         });
 
+        var cat = controller.getCurrentCat();
+
+        var $name = $('#catName').val(cat.name);
+        var $imageUrl = $('#imageUrl').val(cat.imageUrl);
+        var $count = $('#clickCount').val(cat.get_count());
+
         $('.saveChanges').on('click', function(e) {
             var form = $('form');
-            
+
             if (form.valid()) {
                 $('#myModal').modal('hide');
                 // fetch the data in the input fields
+                var cat = controller.getCurrentCat();
+
+                var $name = $('#catName').val(cat.name);
+                var $imageUrl = $('#imageUrl').val(cat.imageUrl);
+                var $count = $('#clickCount').val(cat.get_count());
+
+                //cat.name = 
+                console.log($name, $imageUrl, $count);
+
                 // store the data in the cat
                 // reset the form fields
                 listView.render();
@@ -218,7 +242,7 @@ var formView = {
     },
 
     render: function(argument) {
-        
+
     }
 }
 
