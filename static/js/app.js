@@ -212,17 +212,10 @@ var formView = {
 
         });
 
-        var cat = controller.getCurrentCat();
-
-        var $name = $('#catName').val(cat.name);
-        var $imageUrl = $('#imageUrl').val(cat.imageUrl);
-        var $count = $('#clickCount').val(cat.get_count());
-
         $('.saveChanges').on('click', function(e) {
             var form = $('form');
 
             if (form.valid()) {
-                $('#myModal').modal('hide');
                 // fetch the data in the input fields
                 var cat = controller.getCurrentCat();
 
@@ -232,6 +225,8 @@ var formView = {
 
                 //cat.name = 
                 console.log($name, $imageUrl, $count);
+
+                $('#myModal').modal('hide');                
 
                 // store the data in the cat
                 // reset the form fields
