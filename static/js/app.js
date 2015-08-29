@@ -1,8 +1,6 @@
 // see: https://stackoverflow.com/questions/21203111/bootstrap-3-collapsed-menu-doesnt-close-on-click
 $(document).on('click', '.navbar-collapse.in', function(e) {
     if ($(e.target).is('a') && $(e.target).attr('class') != 'dropdown-toggle') {
-        // console.log(e.target);
-        // console.log($(this));
         $(this).collapse('hide');
     }
 });
@@ -47,8 +45,13 @@ var model = {
             return count;
         };
 
+        var set_count = function(n) {
+            count = n;
+        };
+
         that.inc_count = inc_count;
         that.get_count = get_count;
+        that.set_count = set_count;
 
         // private variables made public
         // obj not secure
@@ -80,11 +83,12 @@ var controller = {
         return model.catList;
     },
 
-    updateCat: function(updated) {
-        var cat = getCurrentCat;
-        cat.name = updated.name;
-        cat.imgUrl = updated.imgUrl;
-        cat.count = updated.count;
+    updateCat: function(i, updated) {
+        //console.log(i);
+
+        model.catList[i].name = updated.name;
+        model.catList[i].imgUrl = updated.imgUrl;
+        model.catList[i].set_count(updated.count);
 
         listView.render();
         catView.render();
@@ -98,7 +102,6 @@ var listView = {
 
     render: function(argument) {
 
-        // this.list = document.getElementById("list");
         this.$list = $('#list').html('')
 
         var cats = controller.getCatList();
@@ -122,6 +125,8 @@ var listView = {
                 return function(e) {
                     controller.setCurrentCat(cat); // store the current cat index
                     catView.render();
+                    $('#catName').attr('catIndex', i);
+                    //console.log(cat.get_count());
                 };
 
             })(cats[i], i)); // use IIFE to bind a cat with a list item
@@ -154,6 +159,14 @@ var catView = {
             catView.render();
             listView.init();
         });
+
+        // display for edit form with correct values
+        $('#myModal').on('show.bs.modal', function(e) {
+            var cat = controller.getCurrentCat();
+            $('#catName').val(cat.name);
+            $('#imageUrl').val(cat.imgUrl);
+            $('#clickCount').val(cat.get_count());
+        });
     },
 
     render: function() {
@@ -171,6 +184,7 @@ var formView = {
         // http://twitterbootstrap.org/bootstrap-form-validation
         // http://jqueryvalidation.org/
 
+        // setup form validation
         var validator = $("form").validate({
             rules: {
                 debug: true,
@@ -205,21 +219,31 @@ var formView = {
 
         $('.saveChanges').on('click', function(e) {
             var form = $('form');
-            
+
             if (form.valid()) {
-                $('#myModal').modal('hide');
                 // fetch the data in the input fields
-                // store the data in the cat
+                var name = $('#catName').val();
+                var index = $('#catName').attr('data-catIndex');
+                var imgUrl = $('#imageUrl').val();
+                var count = +$('#clickCount').val();
+
+                // store the new data in the cat
+                controller.updateCat(index, {
+                    name: name,
+                    imgUrl: imgUrl,
+                    count: count
+                });
+
+                //console.log(index, '\t', name, '\t', imgUrl, '\t', count);
+
+                $('#myModal').modal('hide');
+
                 // reset the form fields
                 listView.render();
                 catView.render();
             };
         });
     },
-
-    render: function(argument) {
-        
-    }
 }
 
 // make it all go
