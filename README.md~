@@ -1,4 +1,4 @@
-# click-the-cat-jquery
+# click-the-cat
 This is a toy web-app I wrote to flex my web developments skills.
 
 It's easy to use:
@@ -10,4 +10,4 @@ It uses a bootstrap responsive layout for the look, JQuery for the DOM manipulat
 jQuery Validation for the form validation and was written in an MVC style without an 
 organisational library.
 
-You can find it online here: https://timebandit.github.io/click-the-cat-jquery
+You can find it online here: https://timebandit.github.io/click-the-cat
